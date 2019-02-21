@@ -1,0 +1,19 @@
+0000,74 03,,        MOV A,#3                ;存入查表索引
+0002,FA,,        MOV R2,A
+0003,2A,,        ADD A,R2
+0004,FA,,        MOV R2,A
+0005,C0 83,,        PUSH DPH
+0007,C0 82,,        PUSH DPL
+0009,90 00 1B,,        MOV DPTR,#TABLE
+000C,93,,        MOVC A,@A+DPTR
+000D,FB,,        MOV R3,A
+000E,EA,,        MOV A,R2
+000F,24 01,,        ADD A,#1
+0011,93,,        MOVC A,@A+DPTR
+0012,FC,,        MOV R4,A
+0013,D0 82,,        POP  DPL
+0015,C0 83,,        PUSH DPH
+0017,8B 80,,        MOV P0,R3
+0019,8C 90,,        MOV P1,R4
+001B,12 34 23 45,TABLE,TABLE: DW 1234H,2345H,3456H,4567H,5678H,6789H
+000E,,,        END

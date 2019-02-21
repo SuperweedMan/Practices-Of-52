@@ -1,4 +1,4 @@
-A51 MACRO ASSEMBLER  MAIN2                                                                02/21/2019 15:51:05 PAGE     1
+A51 MACRO ASSEMBLER  MAIN2                                                                02/21/2019 16:48:48 PAGE     1
 
 
 MACRO ASSEMBLER A51 V8.2.5.0
@@ -20,7 +20,7 @@ LOC  OBJ            LINE     SOURCE
 
 0007 C082              6             PUSH DPL
 
-0009 900017            7             MOV DPTR,#TABLE
+0009 90001B            7             MOV DPTR,#TABLE
 
 000C 93                8             MOVC A,@A+DPTR
 
@@ -38,18 +38,20 @@ LOC  OBJ            LINE     SOURCE
 
 0015 C083             15             PUSH DPH
 
-                      16             
+0017 8B80             16             MOV P0,R3
 
-0017 1234             17     TABLE: DW 1234H,2345H,3456H,4567H,5678H,6789H
+0019 8C90             17             MOV P1,R4
 
-0019 2345                    
-001B 3456                    
-001D 4567                    
-001F 5678                    
-0021 6789                    
-                      18             END
+001B 1234             18     TABLE: DW 1234H,2345H,3456H,4567H,5678H,6789H
 
-A51 MACRO ASSEMBLER  MAIN2                                                                02/21/2019 15:51:05 PAGE     2
+001D 2345                    
+001F 3456                    
+0021 4567                    
+0023 5678                    
+0025 6789                    
+                      19             END
+
+A51 MACRO ASSEMBLER  MAIN2                                                                02/21/2019 16:48:48 PAGE     2
 
 SYMBOL TABLE LISTING
 ------ ----- -------
@@ -59,7 +61,9 @@ N A M E             T Y P E  V A L U E   ATTRIBUTES
 
 DPH. . . . . . . .  D ADDR   0083H   A   
 DPL. . . . . . . .  D ADDR   0082H   A   
-TABLE. . . . . . .  C ADDR   0017H   A   
+P0 . . . . . . . .  D ADDR   0080H   A   
+P1 . . . . . . . .  D ADDR   0090H   A   
+TABLE. . . . . . .  C ADDR   001BH   A   
 
 
 REGISTER BANK(S) USED: 0 
