@@ -1,0 +1,21 @@
+!*.c   
+!*.h  
+   *.log  
+   *.plg  
+   *.bak  
+   *.dep  
+   *.uvgui.*  
+   JLinkLog.txt  
+   *.o  
+   *.d  
+   *.crf  
+   *.tra  
+   *.axf  
+   *.hex  
+   *.lnp  
+   *.sct  
+   *.__i  
+   *.htm  
+   *.uvproj
+   *.A51
+   bash.exe.stackdump
