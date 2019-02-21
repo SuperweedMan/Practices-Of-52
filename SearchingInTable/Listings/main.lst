@@ -1,0 +1,51 @@
+A51 MACRO ASSEMBLER  MAIN                                                                 02/21/2019 15:24:28 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.5.0
+OBJECT MODULE PLACED IN .\Objects\main.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE main.asm SET(SMALL) DEBUG PRINT(.\Listings\main.lst) OBJECT(.\Objects\m
+                      ain.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1             ORG 0000H
+
+0000 7402              2             MOV A,#2
+
+0002 C083              3             PUSH DPH
+
+0004 C082              4             PUSH DPL
+
+0006 90000E            5             MOV DPTR ,#TABLE
+
+0009 93                6             MOVC A,@A+DPTR
+
+000A D082              7             POP DPL
+
+000C D083              8             POP DPH
+
+                       9     
+
+000E 10111213         10     TABLE: DB 10H,11H,12H,13H
+
+                      11     
+
+                      12             END
+
+A51 MACRO ASSEMBLER  MAIN                                                                 02/21/2019 15:24:28 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+DPH. . . . . . . .  D ADDR   0083H   A   
+DPL. . . . . . . .  D ADDR   0082H   A   
+TABLE. . . . . . .  C ADDR   000EH   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

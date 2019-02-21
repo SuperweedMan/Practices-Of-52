@@ -1,0 +1,3 @@
+".\Objects\main2.obj" 
+TO ".\Objects\searchingInTable" 
+PRINT(".\Listings\searchingInTable.m51") RAMSIZE(256) 
