@@ -1,0 +1,3 @@
+".\Objects\main.obj" 
+TO ".\Objects\MultipleInterrupt" 
+PRINT(".\Listings\MultipleInterrupt.m51") RAMSIZE(256) 

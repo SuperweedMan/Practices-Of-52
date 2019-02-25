@@ -1,0 +1,51 @@
+A51 MACRO ASSEMBLER  MAIN                                                                 02/22/2019 11:53:02 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.5.0
+OBJECT MODULE PLACED IN .\Objects\main.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE main.asm SET(SMALL) DEBUG PRINT(.\Listings\main.lst) OBJECT(.\Objects\m
+                      ain.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0003                   1             ORG     0003H
+
+0003 020104            2             LJMP INT00
+
+0013                   3             ORG 0013H
+
+0013 020106            4             LJMP INT11
+
+0100                   5             ORG 0100H
+
+0100 00                6     MAIN:NOP
+
+0101 020100            7             LJMP MAIN
+
+0104 00                8     INT00:NOP
+
+0105 32                9             RETI
+
+0106 00               10     INT11:NOP
+
+0107 32               11             RETI
+
+                      12             END
+
+A51 MACRO ASSEMBLER  MAIN                                                                 02/22/2019 11:53:02 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+INT00. . . . . . .  C ADDR   0104H   A   
+INT11. . . . . . .  C ADDR   0106H   A   
+MAIN . . . . . . .  C ADDR   0100H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

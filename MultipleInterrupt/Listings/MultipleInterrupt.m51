@@ -1,0 +1,47 @@
+BL51 BANKED LINKER/LOCATER V6.22                                                        02/22/2019  11:53:03  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22, INVOKED BY:
+C:\KEIL_V5\C51\BIN\BL51.EXE .\Objects\main.obj TO .\Objects\MultipleInterrupt PRINT (.\Listings\MultipleInterrupt.m51) R
+>> AMSIZE (256)
+
+
+INPUT MODULES INCLUDED:
+  .\Objects\main.obj (MAIN)
+
+
+LINK MAP OF MODULE:  .\Objects\MultipleInterrupt (MAIN)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0108H     ABSOLUTE     
+
+
+
+SYMBOL TABLE OF MODULE:  .\Objects\MultipleInterrupt (MAIN)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        MAIN
+  C:0104H         SYMBOL        INT00
+  C:0106H         SYMBOL        INT11
+  C:0100H         SYMBOL        MAIN
+  C:0003H         LINE#         2
+  C:0013H         LINE#         4
+  C:0100H         LINE#         6
+  C:0101H         LINE#         7
+  C:0104H         LINE#         8
+  C:0105H         LINE#         9
+  C:0106H         LINE#         10
+  C:0107H         LINE#         11
+  -------         ENDMOD        MAIN
+
+Program Size: data=8.0 xdata=0 code=264
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)
