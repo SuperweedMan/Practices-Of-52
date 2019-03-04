@@ -1,0 +1,193 @@
+
+ASEM-51 V1.3                                         Copyright (c) 2002 by W.W. Heinz                                         PAGE 1
+
+
+
+
+
+       MCS-51 Family Macro Assembler   A S E M - 5 1   V 1.3
+       =====================================================
+
+
+
+	Source File:	..\Time2Designed\main2.asm
+	Object File:	..\Time2Designed\main2.hex
+	List File:	..\Time2Designed\main2.lst
+
+
+
+ Line  I  Addr  Code            Source
+
+    1:		N      00C8			T2CON EQU 0C8H
+    2:		B      00CA			TR2 EQU T2CON.2
+    3:		B      00CF			TF2 EQU T2CON.7
+    4:		B      00CE			EXF2 EQU T2CON.6
+    5:		B      00AD			ET2 EQU IE.5
+    6:		N      00CA			RCAP2L EQU 0CAH
+    7:		N      00CB			RCAP2H EQU 0CBH
+    8:		N      00CD			TH2 EQU 0CDH
+    9:		N      00CC			TL2 EQU 0CCH
+   10:		B      00C8			CP_RL2 EQU T2CON.0
+   11:		B      00CB			EXEN2 EQU T2CON.3
+   12:
+   13:		N      0000			ORG 0000H
+   14:	  0000	02 00 2E			LJMP MAIN
+   15:		N      002B			ORG 002BH
+   16:	  002B	02 00 54			LJMP IT2F
+   17:	  002E	78 7F		MAIN:	MOV R0,#7FH
+   18:	  0030	79 02				MOV R1,#2
+   19:	  0032	D2 AD				SETB ET2
+   20:	  0034	D2 AF				SETB EA
+   21:	  0036	D2 CB				SETB EXEN2
+   22:	  0038	D2 C8				SETB CP_RL2
+   23:	  003A	D2 CA				SETB TR2
+   24:	  003C	B9 00 FD	HERE:	CJNE R1,#0,HERE
+   25:	  003F	C2 AF				CLR EA
+   26:	  0041	C2 AD				CLR ET2
+   27:	  0043	C3				CLR C
+   28:	  0044	E5 7D				MOV A,7DH
+   29:	  0046	95 7F				SUBB A,7FH
+   30:	  0048	FD				MOV R5,A       ;低四位
+   31:	  0049	E5 7C				MOV A,7CH
+   32:	  004B	95 7E				SUBB A,7EH
+   33:	  004D	FE				MOV R6,A       ;高四位
+   34:	  004E	8D 80				MOV P0,R5
+   35:	  0050	8E 90				MOV P1,R6
+   36:	  0052	80 FE		HERE2:	SJMP HERE2
+   37:	  0054	10 CE 03	IT2F:	JBC EXF2,NEXT
+   38:	  0057	C2 CF				CLR TF2
+   39:	  0059	32				RETI
+   40:	  005A	B9 00 01	NEXT:	CJNE R1,#0,NEXT2
+   41:	  005D	32				RETI
+   42:	  005E	A6 CA		NEXT2:	MOV @R0,RCAP2L
+   43:	  0060	18				DEC R0
+
+ASEM-51 V1.3                                         Copyright (c) 2002 by W.W. Heinz                                         PAGE 2
+
+
+
+ Line  I  Addr  Code            Source
+
+   44:	  0061	A6 CB				MOV @R0,RCAP2H
+   45:	  0063	19				DEC R1
+   46:	  0064	32				RETI
+   47:						END
+
+
+
+
+
+                     register banks used:  ---
+
+                     no errors
+
+
+
+
+ASEM-51 V1.3                                         Copyright (c) 2002 by W.W. Heinz                                         PAGE 3
+
+
+
+
+
+	       L I S T   O F   S Y M B O L S
+	       =============================
+
+
+SYMBOL				  TYPE     VALUE	LINE
+------------------------------------------------------------
+??ASEM_51			  NUMBER    8051
+??VERSION			  NUMBER    0130
+AC				  BIT	      D6
+ACC				  DATA	      E0
+B				  DATA	      F0
+CP_RL2				  NUMBER    00C8	  10
+CY				  BIT	      D7
+DPH				  DATA	      83
+DPL				  DATA	      82
+EA				  BIT	      AF
+ES				  BIT	      AC
+ET0				  BIT	      A9
+ET1				  BIT	      AB
+ET2				  NUMBER    00AD	   5
+EX0				  BIT	      A8
+EX1				  BIT	      AA
+EXEN2				  NUMBER    00CB	  11
+EXF2				  NUMBER    00CE	   4
+EXTI0				  CODE	    0003
+EXTI1				  CODE	    0013
+F0				  BIT	      D5
+HERE				  CODE	    003C	  24
+HERE2				  CODE	    0052	  36
+IE				  DATA	      A8
+IE0				  BIT	      89
+IE1				  BIT	      8B
+INT0				  BIT	      B2
+INT1				  BIT	      B3
+IP				  DATA	      B8
+IT0				  BIT	      88
+IT1				  BIT	      8A
+IT2F				  CODE	    0054	  37
+MAIN				  CODE	    002E	  17
+NEXT				  CODE	    005A	  40
+NEXT2				  CODE	    005E	  42
+OV				  BIT	      D2
+P				  BIT	      D0
+P0				  DATA	      80
+P1				  DATA	      90
+P2				  DATA	      A0
+P3				  DATA	      B0
+PCON				  DATA	      87
+PS				  BIT	      BC
+PSW				  DATA	      D0
+PT0				  BIT	      B9
+PT1				  BIT	      BB
+PX0				  BIT	      B8
+PX1				  BIT	      BA
+RB8				  BIT	      9A
+RCAP2H				  NUMBER    00CB	   7
+
+ASEM-51 V1.3                                         Copyright (c) 2002 by W.W. Heinz                                         PAGE 4
+
+
+
+SYMBOL				  TYPE     VALUE	LINE
+------------------------------------------------------------
+RCAP2L				  NUMBER    00CA	   6
+RD				  BIT	      B7
+REN				  BIT	      9C
+RESET				  CODE	    0000
+RI				  BIT	      98
+RS0				  BIT	      D3
+RS1				  BIT	      D4
+RXD				  BIT	      B0
+SBUF				  DATA	      99
+SCON				  DATA	      98
+SINT				  CODE	    0023
+SM0				  BIT	      9F
+SM1				  BIT	      9E
+SM2				  BIT	      9D
+SP				  DATA	      81
+T0				  BIT	      B4
+T1				  BIT	      B5
+T2CON				  NUMBER    00C8	   1
+TB8				  BIT	      9B
+TCON				  DATA	      88
+TF0				  BIT	      8D
+TF1				  BIT	      8F
+TF2				  NUMBER    00CF	   3
+TH0				  DATA	      8C
+TH1				  DATA	      8D
+TH2				  NUMBER    00CD	   8
+TI				  BIT	      99
+TIMER0				  CODE	    000B
+TIMER1				  CODE	    001B
+TL0				  DATA	      8A
+TL1				  DATA	      8B
+TL2				  NUMBER    00CC	   9
+TMOD				  DATA	      89
+TR0				  BIT	      8C
+TR1				  BIT	      8E
+TR2				  NUMBER    00CA	   2
+TXD				  BIT	      B1
+WR				  BIT	      B6

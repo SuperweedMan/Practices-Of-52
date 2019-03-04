@@ -1,0 +1,92 @@
+BL51 BANKED LINKER/LOCATER V6.22                                                        02/28/2019  15:20:41  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22, INVOKED BY:
+C:\KEIL_V5\C51\BIN\BL51.EXE .\Objects\main3.obj TO .\Objects\FourWaysToUseTimers PRINT (.\Listings\FourWaysToUseTimers.m
+>> 51) RAMSIZE (256)
+
+
+INPUT MODULES INCLUDED:
+  .\Objects\main3.obj (MAIN3)
+
+
+LINK MAP OF MODULE:  .\Objects\FourWaysToUseTimers (MAIN3)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0060H     ABSOLUTE     
+
+
+
+SYMBOL TABLE OF MODULE:  .\Objects\FourWaysToUseTimers (MAIN3)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        MAIN3
+  B:00A8H.7       SYMBOL        EA
+  B:00A8H.4       SYMBOL        ES
+  B:00A8H.1       SYMBOL        ET0
+  B:00A8H.3       SYMBOL        ET1
+  C:004BH         SYMBOL        HERE
+  C:0026H         SYMBOL        MAIN
+  C:005DH         SYMBOL        NEXT
+  D:0090H         SYMBOL        P1
+  D:0087H         SYMBOL        PCON
+  B:0098H.4       SYMBOL        REN
+  B:0098H.0       SYMBOL        RI
+  B:0098H.6       SYMBOL        SM1
+  C:004DH         SYMBOL        T0_F
+  C:0053H         SYMBOL        T1_F
+  D:008CH         SYMBOL        TH0
+  D:008DH         SYMBOL        TH1
+  D:008AH         SYMBOL        TL0
+  D:008BH         SYMBOL        TL1
+  D:0089H         SYMBOL        TMOD
+  B:0088H.4       SYMBOL        TR0
+  B:0088H.6       SYMBOL        TR1
+  C:0059H         SYMBOL        USART
+  C:0000H         LINE#         2
+  C:000BH         LINE#         4
+  C:001BH         LINE#         6
+  C:0023H         LINE#         8
+  C:0026H         LINE#         9
+  C:0029H         LINE#         10
+  C:002CH         LINE#         11
+BL51 BANKED LINKER/LOCATER V6.22                                                      02/28/2019  15:20:41  PAGE 2
+
+
+  C:002FH         LINE#         12
+  C:0032H         LINE#         13
+  C:0035H         LINE#         14
+  C:0037H         LINE#         15
+  C:0039H         LINE#         16
+  C:003BH         LINE#         17
+  C:003DH         LINE#         18
+  C:003FH         LINE#         19
+  C:0041H         LINE#         20
+  C:0043H         LINE#         21
+  C:0045H         LINE#         22
+  C:0047H         LINE#         23
+  C:0049H         LINE#         24
+  C:004BH         LINE#         25
+  C:004DH         LINE#         26
+  C:004FH         LINE#         27
+  C:0052H         LINE#         28
+  C:0053H         LINE#         29
+  C:0055H         LINE#         30
+  C:0058H         LINE#         31
+  C:0059H         LINE#         32
+  C:005CH         LINE#         33
+  C:005DH         LINE#         34
+  C:005FH         LINE#         35
+  -------         ENDMOD        MAIN3
+
+Program Size: data=8.0 xdata=0 code=96
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

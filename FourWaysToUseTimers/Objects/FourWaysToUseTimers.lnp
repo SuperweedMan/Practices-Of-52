@@ -1,0 +1,3 @@
+".\Objects\main3.obj" 
+TO ".\Objects\FourWaysToUseTimers" 
+PRINT(".\Listings\FourWaysToUseTimers.m51") RAMSIZE(256) 

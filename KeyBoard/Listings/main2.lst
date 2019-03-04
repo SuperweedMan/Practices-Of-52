@@ -1,0 +1,165 @@
+A51 MACRO ASSEMBLER  MAIN2                                                                03/04/2019 17:23:28 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.5.0
+OBJECT MODULE PLACED IN .\Objects\main2.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE main2.asm SET(SMALL) DEBUG PRINT(.\Listings\main2.lst) OBJECT(.\Objects
+                      \main2.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+                       1     ;多按点矩阵键盘 扫描法
+
+0000                   2                     ORG 0000H
+
+0000 020003            3                     LJMP MAIN
+
+0003 758160            4     MAIN:   MOV SP,#60H
+
+0006 75800F            5     LOOP:   MOV P0,#0FH             ;初始化
+
+0009 753000            6                     MOV 30H,#0              ;检查到几个有效按键
+
+000C 120063            7                     LCALL DELAY
+
+000F E580              8                     MOV A,P0
+
+0011 B40F02            9                     CJNE A,#0FH,SE1
+
+0014 80F0             10                     SJMP LOOP
+
+0016 120063           11     SE1:    LCALL DELAY             ;消抖
+
+0019 E580             12                     MOV A,P0
+
+001B B40F02           13                     CJNE A,#0FH,SE2
+
+001E 80E6             14                     SJMP LOOP
+
+0020 7A04             15     SE2:    MOV R2,#4               ;循环扫描四列
+
+0022 7EEF             16                     MOV R6,#0EFH
+
+0024 8E80             17                     MOV P0,R6       ;扫描一列
+
+0026 7B04             18     SE5:    MOV R3,#4               ;循环扫描四行
+
+0028 D3               19                     SETB C
+
+0029 E580             20                     MOV A,P0
+
+002B 13               21     SE4:    RRC A
+
+002C 5005             22                     JNC SE3                 ;扫描到行有效
+
+002E DBFB             23                     DJNZ R3,SE4             ;继续扫描下一行
+
+0030 020045           24                     LJMP  SE6               ;本列无
+
+0033 0530             25     SE3:    INC 30H                 ;有效按键加1
+
+0035 7404             26                     MOV A,#4
+
+0037 9B               27                     SUBB A,R3               ;前面有几行
+
+0038 75F004           28                     MOV B,#4
+
+003B A4               29                     MUL AB                  ;前面有几个按键
+
+003C F531             30                     MOV 31H,A               ;暂存
+
+003E 7405             31                     MOV A,#5
+
+0040 9A               32                     SUBB A,R2
+
+0041 2531             33                     ADD A,31H               ;求键值
+
+0043 C0E0             34                     PUSH ACC                ;键值入栈
+
+0045 EE               35     SE6:    MOV A,R6                ;开始换下一列
+
+0046 D3               36                     SETB C
+
+0047 33               37                     RLC A
+
+0048 FE               38                     MOV R6,A
+
+0049 8E80             39                     MOV P0,R6
+
+004B DAD9             40                     DJNZ R2,SE5
+
+004D 75800F           41                     MOV P0,#0FH
+
+0050 E580             42     TECH:   MOV A,P0                ;松手检测
+
+0052 B40FFB           43                     CJNE A,#0FH,TECH
+
+0055 AD30             44                     MOV R5,30H              ;开始出栈所有按键
+
+0057 D0E0             45     DIS:    POP ACC
+
+0059 F590             46                     MOV P1,A
+
+005B DDFA             47                     DJNZ R5,DIS
+
+005D 120063           48                     LCALL DELAY
+
+0060 020006           49                     LJMP LOOP
+
+                      50     
+
+0063 C030             51     DELAY:  PUSH 30H
+
+0065 C031             52                     PUSH 31H
+
+0067 753014           53                     MOV 30H,#20
+
+006A 7531F9           54     DELAY1: MOV 31H,#249
+
+006D D531FD           55                     DJNZ 31H,$
+
+0070 D530F7           56                     DJNZ 30H,DELAY1
+
+0073 D031             57                     POP 31H
+
+A51 MACRO ASSEMBLER  MAIN2                                                                03/04/2019 17:23:28 PAGE     2
+
+0075 D030             58                     POP 30H
+
+0077 22               59                     RET
+
+                      60                     
+
+                      61                     END
+
+A51 MACRO ASSEMBLER  MAIN2                                                                03/04/2019 17:23:28 PAGE     3
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+ACC. . . . . . . .  D ADDR   00E0H   A   
+B. . . . . . . . .  D ADDR   00F0H   A   
+DELAY. . . . . . .  C ADDR   0063H   A   
+DELAY1 . . . . . .  C ADDR   006AH   A   
+DIS. . . . . . . .  C ADDR   0057H   A   
+LOOP . . . . . . .  C ADDR   0006H   A   
+MAIN . . . . . . .  C ADDR   0003H   A   
+P0 . . . . . . . .  D ADDR   0080H   A   
+P1 . . . . . . . .  D ADDR   0090H   A   
+SE1. . . . . . . .  C ADDR   0016H   A   
+SE2. . . . . . . .  C ADDR   0020H   A   
+SE3. . . . . . . .  C ADDR   0033H   A   
+SE4. . . . . . . .  C ADDR   002BH   A   
+SE5. . . . . . . .  C ADDR   0026H   A   
+SE6. . . . . . . .  C ADDR   0045H   A   
+SP . . . . . . . .  D ADDR   0081H   A   
+TECH . . . . . . .  C ADDR   0050H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

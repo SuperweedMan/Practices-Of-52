@@ -1,0 +1,34 @@
+,,,;T2COM: TF2 EXF2 RCLK TCLK EXEN2 TR2 C/T2 CP/RL2
+,,,;T2MOD:  T2OE DCEN
+,,,;IE: EA ET2 ES ET1 EX1 ET0 EX0
+,,,;IP: PT2 PS PT1 PX1 PT0 PX0
+,,,                T2CON EQU 0C8H
+000B,,,                TR2 EQU T2CON.2
+000B,,,                TF2 EQU T2CON.7
+000B,,,                ET2 EQU IE.5
+,,,                RCAP2L EQU 0CAH
+,,,                RCAP2H EQU 0CBH
+,,,                TH2 EQU 0CDH
+,,,                TL2 EQU 0CCH
+,,,                ORG     0000H
+0000,02 00 2E,,                LJMP MAIN
+,,,                ORG     002BH
+002B,02 00 46,,                LJMP IT2F
+002E,C2 90,MAIN,MAIN:   CLR     P1.0
+0030,78 14,,                MOV R0,#20
+0032,D2 AF,,                SETB EA
+0034,D2 AD,,                SETB ET2
+0036,75 CB 3C,,                MOV RCAP2H,#3CH
+0039,75 CA AD,,                MOV RCAP2L,#0ADH
+003C,75 CD 3C,,                MOV TH2,#3CH
+003F,75 CC AD,,                MOV TL2,#0ADH
+0042,D2 CA,,                SETB TR2
+0044,80 FE,HERE,HERE:   SJMP HERE
+0046,C2 CF,IT2F,IT2F:   CLR TF2
+0048,D8 04,,                DJNZ R0,NEXT
+004A,B2 90,,                CPL P1.0
+004C,78 14,,                MOV R0,#20
+004E,00,NEXT,NEXT:   NOP
+004F,00,,                NOP
+0050,32,,                RETI
+000E,,,                END

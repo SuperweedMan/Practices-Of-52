@@ -1,0 +1,145 @@
+A51 MACRO ASSEMBLER  MAIN                                                                 03/04/2019 17:12:02 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.5.0
+OBJECT MODULE PLACED IN .\Objects\main.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE main.asm SET(SMALL) DEBUG PRINT(.\Listings\main.lst) OBJECT(.\Objects\m
+                      ain.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+                       1     ;综合多分支转移
+
+0000                   2                     ORG 0000H
+
+0000 020003            3                     LJMP MAIN
+
+0003 758160            4     MAIN:   MOV SP ,#60H
+
+0006 75800F            5     LOOP:   MOV P0,#0FH ;初始化键盘
+
+0009 E580              6                     MOV A,P0
+
+000B B40F02            7                     CJNE A,#0FH,STEP1
+
+000E 80F6              8                     SJMP LOOP
+
+0010 120053            9     STEP1:  LCALL DELAY
+
+0013 E580             10                     MOV A,P0
+
+0015 B40F02           11                     CJNE A,#0FH,STEP2
+
+0018 80EC             12                     SJMP LOOP
+
+001A 7A04             13     STEP2:  MOV R2,#4 ;循环四次
+
+001C D3               14                     SETB C
+
+001D 13               15     STEP3:  RRC A
+
+001E 5005             16                     JNC STEP4
+
+0020 DAFB             17                     DJNZ R2,STEP3
+
+0022 020006           18                     LJMP LOOP  ;错误处理
+
+0025 7405             19     STEP4:  MOV A,#5
+
+0027 9A               20                     SUBB A,R2
+
+0028 F530             21                     MOV 30H,A ;将行数放到30H
+
+002A 7A04             22                     MOV R2,#4
+
+002C 7580F0           23                     MOV P0,#0F0H
+
+002F E580             24                     MOV A,P0
+
+0031 D3               25                     SETB C
+
+0032 33               26     STEP5:  RLC A
+
+0033 5005             27                     JNC STEP6
+
+0035 DAFB             28                     DJNZ R2,STEP5
+
+0037 020006           29                     LJMP LOOP
+
+003A 8A31             30     STEP6:  MOV 31H,R2 ;把列数放到31H
+
+                      31                     
+
+003C E530             32                     MOV A,30H
+
+003E 9401             33                     SUBB A,#1
+
+0040 75F004           34                     MOV B,#4
+
+0043 A4               35                     MUL AB
+
+0044 2531             36                     ADD A,31H
+
+0046 F590             37                     MOV P1,A
+
+0048 E580             38     HERE:   MOV A,P0
+
+004A B4F0FB           39                     CJNE A,#0F0H,HERE
+
+004D 120053           40                     LCALL DELAY
+
+0050 020006           41                     LJMP LOOP
+
+                      42                     
+
+0053 C030             43     DELAY:  PUSH 30H
+
+0055 C031             44                     PUSH 31H
+
+0057 753014           45                     MOV 30H,#20
+
+005A 7531F9           46     DELAY1: MOV 31H,#249
+
+005D D531FD           47                     DJNZ 31H,$
+
+0060 D530F7           48                     DJNZ 30H,DELAY1
+
+0063 D031             49                     POP 31H
+
+0065 D030             50                     POP 30H
+
+0067 22               51                     RET
+
+                      52                     
+
+                      53                     END
+
+A51 MACRO ASSEMBLER  MAIN                                                                 03/04/2019 17:12:02 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+B. . . . . . . . .  D ADDR   00F0H   A   
+DELAY. . . . . . .  C ADDR   0053H   A   
+DELAY1 . . . . . .  C ADDR   005AH   A   
+HERE . . . . . . .  C ADDR   0048H   A   
+LOOP . . . . . . .  C ADDR   0006H   A   
+MAIN . . . . . . .  C ADDR   0003H   A   
+P0 . . . . . . . .  D ADDR   0080H   A   
+P1 . . . . . . . .  D ADDR   0090H   A   
+SP . . . . . . . .  D ADDR   0081H   A   
+STEP1. . . . . . .  C ADDR   0010H   A   
+STEP2. . . . . . .  C ADDR   001AH   A   
+STEP3. . . . . . .  C ADDR   001DH   A   
+STEP4. . . . . . .  C ADDR   0025H   A   
+STEP5. . . . . . .  C ADDR   0032H   A   
+STEP6. . . . . . .  C ADDR   003AH   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

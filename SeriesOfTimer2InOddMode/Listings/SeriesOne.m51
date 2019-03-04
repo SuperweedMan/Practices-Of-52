@@ -1,0 +1,142 @@
+BL51 BANKED LINKER/LOCATER V6.22                                                        02/28/2019  17:07:36  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22, INVOKED BY:
+C:\KEIL_V5\C51\BIN\BL51.EXE .\Objects\main1.obj TO .\Objects\SeriesOne PRINT (.\Listings\SeriesOne.m51) RAMSIZE (256)
+
+
+INPUT MODULES INCLUDED:
+  .\Objects\main1.obj (MAIN1)
+
+
+LINK MAP OF MODULE:  .\Objects\SeriesOne (MAIN1)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     00B4H     ABSOLUTE     
+
+
+
+SYMBOL TABLE OF MODULE:  .\Objects\SeriesOne (MAIN1)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        MAIN1
+  D:00E0H         SYMBOL        ACC
+  C:0060H         SYMBOL        DELAY
+  B:00A8H.7       SYMBOL        EA
+  C:00ACH         SYMBOL        ERR
+  B:00A8H.4       SYMBOL        ES
+  B:00D0H.5       SYMBOL        F0
+  C:002FH         SYMBOL        HERE
+  C:003CH         SYMBOL        INIT
+  C:006EH         SYMBOL        LOOP1
+  C:006BH         SYMBOL        LOOP2
+  C:0026H         SYMBOL        MAIN
+  C:0034H         SYMBOL        NEXT
+  B:00D0H.0       SYMBOL        P
+  D:0090H         SYMBOL        P1
+  D:0087H         SYMBOL        PCON
+  D:00D0H         SYMBOL        PSW
+  B:0098H.2       SYMBOL        RB8
+  N:00CBH         SYMBOL        RCAP2H
+  N:00CAH         SYMBOL        RCAP2L
+  C:0097H         SYMBOL        RECEIVE
+  B:0098H.0       SYMBOL        RI
+  D:0099H         SYMBOL        SBUF
+  D:0098H         SYMBOL        SCON
+  C:00A7H         SYMBOL        SE1
+  C:00AAH         SYMBOL        SE2
+  C:00B1H         SYMBOL        SEND
+  C:007DH         SYMBOL        SENDBUFF
+  C:0090H         SYMBOL        SERIES
+  D:0081H         SYMBOL        SP
+  N:00C8H         SYMBOL        T2CON
+BL51 BANKED LINKER/LOCATER V6.22                                                      02/28/2019  17:07:36  PAGE 2
+
+
+  B:0098H.3       SYMBOL        TB8
+  N:00CDH         SYMBOL        TH2
+  B:0098H.1       SYMBOL        TI
+  N:00CCH         SYMBOL        TL2
+  B:00C8H.2       SYMBOL        TR2
+  C:0000H         LINE#         9
+  C:0023H         LINE#         11
+  C:0026H         LINE#         12
+  C:0029H         LINE#         13
+  C:002CH         LINE#         14
+  C:002FH         LINE#         15
+  C:0032H         LINE#         16
+  C:0034H         LINE#         17
+  C:0037H         LINE#         18
+  C:003AH         LINE#         19
+  C:003CH         LINE#         21
+  C:003EH         LINE#         22
+  C:0040H         LINE#         23
+  C:0043H         LINE#         24
+  C:0046H         LINE#         25
+  C:0049H         LINE#         26
+  C:004CH         LINE#         27
+  C:004FH         LINE#         28
+  C:0052H         LINE#         29
+  C:0055H         LINE#         30
+  C:0057H         LINE#         31
+  C:0059H         LINE#         32
+  C:005BH         LINE#         33
+  C:005DH         LINE#         34
+  C:005FH         LINE#         35
+  C:0060H         LINE#         37
+  C:0062H         LINE#         38
+  C:0064H         LINE#         39
+  C:0066H         LINE#         40
+  C:0068H         LINE#         41
+  C:006BH         LINE#         42
+  C:006EH         LINE#         43
+  C:0071H         LINE#         44
+  C:0074H         LINE#         45
+  C:0076H         LINE#         46
+  C:0078H         LINE#         47
+  C:007AH         LINE#         48
+  C:007CH         LINE#         49
+  C:007DH         LINE#         51
+  C:007FH         LINE#         52
+  C:0081H         LINE#         53
+  C:0083H         LINE#         54
+  C:0085H         LINE#         55
+  C:0086H         LINE#         56
+  C:0088H         LINE#         57
+  C:008BH         LINE#         58
+  C:008DH         LINE#         59
+  C:008FH         LINE#         60
+  C:0090H         LINE#         62
+  C:0093H         LINE#         63
+  C:0096H         LINE#         64
+  C:0097H         LINE#         65
+BL51 BANKED LINKER/LOCATER V6.22                                                      02/28/2019  17:07:36  PAGE 3
+
+
+  C:0099H         LINE#         66
+  C:009BH         LINE#         67
+  C:009DH         LINE#         68
+  C:009FH         LINE#         69
+  C:00A0H         LINE#         70
+  C:00A2H         LINE#         71
+  C:00A5H         LINE#         72
+  C:00A7H         LINE#         73
+  C:00AAH         LINE#         74
+  C:00ACH         LINE#         75
+  C:00AEH         LINE#         76
+  C:00B0H         LINE#         77
+  C:00B1H         LINE#         78
+  C:00B3H         LINE#         79
+  -------         ENDMOD        MAIN1
+
+Program Size: data=8.0 xdata=0 code=180
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

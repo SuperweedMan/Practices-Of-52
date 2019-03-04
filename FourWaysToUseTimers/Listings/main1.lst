@@ -1,0 +1,78 @@
+A51 MACRO ASSEMBLER  MAIN1                                                                02/27/2019 13:26:41 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.5.0
+OBJECT MODULE PLACED IN .\Objects\main1.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE main1.asm SET(SMALL) DEBUG PRINT(.\Listings\main1.lst) OBJECT(.\Objects
+                      \main1.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+                       1     ;方式一：16位定时器
+
+                       2     ;IE:EA ET2 ES ET1 EX1 ET0 EX0
+
+                       3     ;IP:PA PT2 PS PT1 PX1 PT0 PX0
+
+                       4     ;TCON TF1 TR1 TF0 TR0 IE1 IT1 IE0 IT0
+
+                       5     ;TMOD GATE C/T M1 M0 GATE C/T M1 M0 
+
+0000                   6                     ORG 0000H
+
+0000 02000E            7                     LJMP MAIN
+
+000B                   8                     ORG 000BH
+
+000B 020021            9                     LJMP IT0F
+
+000E 758901           10     MAIN:   MOV TMOD,#01H
+
+0011 758A10           11                     MOV TL0,#10H
+
+0014 758C27           12                     MOV TH0,#27H
+
+0017 D2AF             13                     SETB EA
+
+0019 D2A9             14                     SETB ET0
+
+001B C290             15                     CLR P1.0
+
+001D D28C             16                     SETB TR0
+
+001F 80FE             17     HERE:   SJMP HERE
+
+0021 B290             18     IT0F:   CPL P1.0
+
+0023 758A10           19                     MOV TL0,#10H
+
+0026 758C27           20                     MOV TH0,#27H
+
+0029 32               21                     RETI
+
+                      22                     END
+
+A51 MACRO ASSEMBLER  MAIN1                                                                02/27/2019 13:26:41 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+EA . . . . . . . .  B ADDR   00A8H.7 A   
+ET0. . . . . . . .  B ADDR   00A8H.1 A   
+HERE . . . . . . .  C ADDR   001FH   A   
+IT0F . . . . . . .  C ADDR   0021H   A   
+MAIN . . . . . . .  C ADDR   000EH   A   
+P1 . . . . . . . .  D ADDR   0090H   A   
+TH0. . . . . . . .  D ADDR   008CH   A   
+TL0. . . . . . . .  D ADDR   008AH   A   
+TMOD . . . . . . .  D ADDR   0089H   A   
+TR0. . . . . . . .  B ADDR   0088H.4 A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

@@ -1,0 +1,141 @@
+A51 MACRO ASSEMBLER  MAIN2                                                                02/27/2019 11:31:59 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.5.0
+OBJECT MODULE PLACED IN .\Objects\main2.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE main2.asm SET(SMALL) DEBUG PRINT(.\Listings\main2.lst) OBJECT(.\Objects
+                      \main2.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+  00C8                 1                     T2CON EQU 0C8H
+
+  00CA                 2                     TR2 EQU T2CON.2
+
+  00CF                 3                     TF2 EQU T2CON.7
+
+  00CE                 4                     EXF2 EQU T2CON.6
+
+  00AD                 5                     ET2 EQU IE.5
+
+  00CA                 6                     RCAP2L EQU 0CAH
+
+  00CB                 7                     RCAP2H EQU 0CBH
+
+  00CD                 8                     TH2 EQU 0CDH
+
+  00CC                 9                     TL2 EQU 0CCH    
+
+  00C8                10                     CP_RL2 EQU T2CON.0
+
+  00CB                11                     EXEN2 EQU T2CON.3
+
+                      12     
+
+0000                  13                     ORG 0000H
+
+0000 02002E           14                     LJMP MAIN
+
+002B                  15                     ORG 002BH
+
+002B 020054           16                     LJMP IT2F
+
+002E 787F             17     MAIN:   MOV R0,#7FH
+
+0030 7902             18                     MOV R1,#2
+
+0032 D2AD             19                     SETB ET2
+
+0034 D2AF             20                     SETB EA
+
+0036 D2CB             21                     SETB EXEN2
+
+0038 D2C8             22                     SETB CP_RL2
+
+003A D2CA             23                     SETB TR2
+
+003C B900FD           24     HERE:   CJNE R1,#0,HERE
+
+003F C2AF             25                     CLR EA
+
+0041 C2AD             26                     CLR ET2
+
+0043 C3               27                     CLR C
+
+0044 E57D             28                     MOV A,7DH
+
+0046 957F             29                     SUBB A,7FH
+
+0048 FD               30                     MOV R5,A       ;低四位      
+
+0049 E57C             31                     MOV A,7CH
+
+004B 957E             32                     SUBB A,7EH
+
+004D FE               33                     MOV R6,A       ;高四位
+
+004E 8D80             34                     MOV P0,R5
+
+0050 8E90             35                     MOV P1,R6
+
+0052 80FE             36     HERE2:  SJMP HERE2
+
+0054 10CE03           37     IT2F:   JBC EXF2,NEXT
+
+0057 C2CF             38                     CLR TF2
+
+0059 32               39                     RETI
+
+005A B90001           40     NEXT:   CJNE R1,#0,NEXT2
+
+005D 32               41                     RETI
+
+005E A6CA             42     NEXT2:  MOV @R0,RCAP2L
+
+0060 18               43                     DEC R0
+
+0061 A6CB             44                     MOV @R0,RCAP2H
+
+0063 18               45                     DEC R0
+
+0064 19               46                     DEC R1
+
+0065 32               47                     RETI
+
+                      48                     END
+
+A51 MACRO ASSEMBLER  MAIN2                                                                02/27/2019 11:31:59 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+CP_RL2 . . . . . .  B ADDR   00C8H.0 A   
+EA . . . . . . . .  B ADDR   00A8H.7 A   
+ET2. . . . . . . .  B ADDR   00A8H.5 A   
+EXEN2. . . . . . .  B ADDR   00C8H.3 A   
+EXF2 . . . . . . .  B ADDR   00C8H.6 A   
+HERE . . . . . . .  C ADDR   003CH   A   
+HERE2. . . . . . .  C ADDR   0052H   A   
+IE . . . . . . . .  D ADDR   00A8H   A   
+IT2F . . . . . . .  C ADDR   0054H   A   
+MAIN . . . . . . .  C ADDR   002EH   A   
+NEXT . . . . . . .  C ADDR   005AH   A   
+NEXT2. . . . . . .  C ADDR   005EH   A   
+P0 . . . . . . . .  D ADDR   0080H   A   
+P1 . . . . . . . .  D ADDR   0090H   A   
+RCAP2H . . . . . .  N NUMB   00CBH   A   
+RCAP2L . . . . . .  N NUMB   00CAH   A   
+T2CON. . . . . . .  N NUMB   00C8H   A   
+TF2. . . . . . . .  B ADDR   00C8H.7 A   
+TH2. . . . . . . .  N NUMB   00CDH   A   
+TL2. . . . . . . .  N NUMB   00CCH   A   
+TR2. . . . . . . .  B ADDR   00C8H.2 A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

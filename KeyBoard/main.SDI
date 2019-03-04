@@ -1,0 +1,53 @@
+,,,;综合多分支转移
+,,,                ORG 0000H
+0000,02 00 03,,                LJMP MAIN
+0003,75 81 60,MAIN,MAIN:   MOV SP ,#60H
+0006,75 80 0F,LOOP,LOOP:   MOV P0,#0FH ;初始化键盘
+0009,E5 80,,                MOV A,P0
+000B,B4 0F 02,,                CJNE A,#0FH,STEP1
+000E,80 F6,,                SJMP LOOP
+0010,12 00 53,STEP1,STEP1:  LCALL DELAY
+0013,E5 80,,                MOV A,P0
+0015,B4 0F 02,,                CJNE A,#0FH,STEP2
+0018,80 EC,,                SJMP LOOP
+001A,7A 04,STEP2,STEP2:  MOV R2,#4 ;循环四次
+001C,D3,,                SETB C
+001D,13,STEP3,STEP3:  RRC A
+001E,50 05,,                JNC STEP4
+0020,DA FB,,                DJNZ R2,STEP3
+0022,02 00 06,,                LJMP LOOP  ;错误处理
+0025,74 05,STEP4,STEP4:  MOV A,#5
+0027,9A,,                SUBB A,R2
+0028,F5 30,,                MOV 30H,A ;将行数放到30H
+002A,7A 04,,                MOV R2,#4
+002C,75 80 F0,,                MOV P0,#0F0H
+002F,E5 80,,                MOV A,P0
+0031,D3,,                SETB C
+0032,33,STEP5,STEP5:  RLC A
+0033,50 05,,                JNC STEP6
+0035,DA FB,,                DJNZ R2,STEP5
+0037,02 00 06,,                LJMP LOOP
+003A,8A 31,STEP6,STEP6:  MOV 31H,R2 ;把列数放到31H
+,,,
+003C,E5 30,,                MOV A,30H
+003E,94 01,,                SUBB A,#1
+0040,75 F0 04,,                MOV B,#4
+0043,A4,,                MUL AB
+0044,25 31,,                ADD A,31H
+0046,F5 90,,                MOV P1,A
+0048,E5 80,HERE,HERE:   MOV A,P0
+004A,B4 F0 FB,,                CJNE A,#0F0H,HERE
+004D,12 00 53,,                LCALL DELAY
+0050,02 00 06,,                LJMP LOOP
+,,,
+0053,C0 30,DELAY,DELAY:  PUSH 30H
+0055,C0 31,,                PUSH 31H
+0057,75 30 14,,                MOV 30H,#20
+005A,75 31 F9,DELAY1,DELAY1: MOV 31H,#249
+005D,D5 31 FD,,                DJNZ 31H,$
+0060,D5 30 F7,,                DJNZ 30H,DELAY1
+0063,D0 31,,                POP 31H
+0065,D0 30,,                POP 30H
+0067,22,,                RET
+,,,
+000E,,,                END

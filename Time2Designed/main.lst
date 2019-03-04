@@ -1,0 +1,173 @@
+
+ASEM-51 V1.3                                         Copyright (c) 2002 by W.W. Heinz                                         PAGE 1
+
+
+
+
+
+       MCS-51 Family Macro Assembler   A S E M - 5 1   V 1.3
+       =====================================================
+
+
+
+	Source File:	..\Time2Designed\main.asm
+	Object File:	..\Time2Designed\main.hex
+	List File:	..\Time2Designed\main.lst
+
+
+
+ Line  I  Addr  Code            Source
+
+    1:				;T2COM: TF2 EXF2 RCLK TCLK EXEN2 TR2 C/T2 CP/RL2
+    2:				;T2MOD:  T2OE DCEN
+    3:				;IE: EA ET2 ES ET1 EX1 ET0 EX0
+    4:				;IP: PT2 PS PT1 PX1 PT0 PX0
+    5:		N      00C8			T2CON EQU 0C8H
+    6:		B      00CA			TR2 EQU T2CON.2
+    7:		B      00CF			TF2 EQU T2CON.7
+    8:		B      00AD			ET2 EQU IE.5
+    9:		N      00CA			RCAP2L EQU 0CAH
+   10:		N      00CB			RCAP2H EQU 0CBH
+   11:		N      00CD			TH2 EQU 0CDH
+   12:		N      00CC			TL2 EQU 0CCH
+   13:		N      0000			ORG	0000H
+   14:	  0000	02 00 2E			LJMP MAIN
+   15:		N      002B			ORG	002BH
+   16:	  002B	02 00 46			LJMP IT2F
+   17:	  002E	C2 90		MAIN:	CLR	P1.0
+   18:	  0030	78 14				MOV R0,#20
+   19:	  0032	D2 AF				SETB EA
+   20:	  0034	D2 AD				SETB ET2
+   21:	  0036	75 CB 3C			MOV RCAP2H,#3CH
+   22:	  0039	75 CA AD			MOV RCAP2L,#0ADH
+   23:	  003C	75 CD 3C			MOV TH2,#3CH
+   24:	  003F	75 CC AD			MOV TL2,#0ADH
+   25:	  0042	D2 CA		 		SETB TR2
+   26:	  0044	80 FE		HERE:	SJMP HERE
+   27:	  0046	C2 CF		IT2F:	CLR TF2
+   28:	  0048	D8 04				DJNZ R0,NEXT
+   29:	  004A	B2 90				CPL P1.0
+   30:	  004C	78 14				MOV R0,#20
+   31:	  004E	00		NEXT:	NOP
+   32:	  004F	00				NOP
+   33:	  0050	32				RETI
+   34:						END
+
+
+
+
+
+                     register banks used:  ---
+
+                     no errors
+
+
+ASEM-51 V1.3                                         Copyright (c) 2002 by W.W. Heinz                                         PAGE 2
+
+
+
+
+
+
+ASEM-51 V1.3                                         Copyright (c) 2002 by W.W. Heinz                                         PAGE 3
+
+
+
+
+
+	       L I S T   O F   S Y M B O L S
+	       =============================
+
+
+SYMBOL				  TYPE     VALUE	LINE
+------------------------------------------------------------
+??ASEM_51			  NUMBER    8051
+??VERSION			  NUMBER    0130
+AC				  BIT	      D6
+ACC				  DATA	      E0
+B				  DATA	      F0
+CY				  BIT	      D7
+DPH				  DATA	      83
+DPL				  DATA	      82
+EA				  BIT	      AF
+ES				  BIT	      AC
+ET0				  BIT	      A9
+ET1				  BIT	      AB
+ET2				  NUMBER    00AD	   8
+EX0				  BIT	      A8
+EX1				  BIT	      AA
+EXTI0				  CODE	    0003
+EXTI1				  CODE	    0013
+F0				  BIT	      D5
+HERE				  CODE	    0044	  26
+IE				  DATA	      A8
+IE0				  BIT	      89
+IE1				  BIT	      8B
+INT0				  BIT	      B2
+INT1				  BIT	      B3
+IP				  DATA	      B8
+IT0				  BIT	      88
+IT1				  BIT	      8A
+IT2F				  CODE	    0046	  27
+MAIN				  CODE	    002E	  17
+NEXT				  CODE	    004E	  31
+OV				  BIT	      D2
+P				  BIT	      D0
+P0				  DATA	      80
+P1				  DATA	      90
+P2				  DATA	      A0
+P3				  DATA	      B0
+PCON				  DATA	      87
+PS				  BIT	      BC
+PSW				  DATA	      D0
+PT0				  BIT	      B9
+PT1				  BIT	      BB
+PX0				  BIT	      B8
+PX1				  BIT	      BA
+RB8				  BIT	      9A
+RCAP2H				  NUMBER    00CB	  10
+RCAP2L				  NUMBER    00CA	   9
+RD				  BIT	      B7
+REN				  BIT	      9C
+RESET				  CODE	    0000
+RI				  BIT	      98
+
+ASEM-51 V1.3                                         Copyright (c) 2002 by W.W. Heinz                                         PAGE 4
+
+
+
+SYMBOL				  TYPE     VALUE	LINE
+------------------------------------------------------------
+RS0				  BIT	      D3
+RS1				  BIT	      D4
+RXD				  BIT	      B0
+SBUF				  DATA	      99
+SCON				  DATA	      98
+SINT				  CODE	    0023
+SM0				  BIT	      9F
+SM1				  BIT	      9E
+SM2				  BIT	      9D
+SP				  DATA	      81
+T0				  BIT	      B4
+T1				  BIT	      B5
+T2CON				  NUMBER    00C8	   5
+TB8				  BIT	      9B
+TCON				  DATA	      88
+TF0				  BIT	      8D
+TF1				  BIT	      8F
+TF2				  NUMBER    00CF	   7
+TH0				  DATA	      8C
+TH1				  DATA	      8D
+TH2				  NUMBER    00CD	  11
+TI				  BIT	      99
+TIMER0				  CODE	    000B
+TIMER1				  CODE	    001B
+TL0				  DATA	      8A
+TL1				  DATA	      8B
+TL2				  NUMBER    00CC	  12
+TMOD				  DATA	      89
+TR0				  BIT	      8C
+TR1				  BIT	      8E
+TR2				  NUMBER    00CA	   6
+TXD				  BIT	      B1
+WR				  BIT	      B6

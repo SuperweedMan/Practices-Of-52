@@ -1,0 +1,61 @@
+,,,;多按点矩阵键盘 扫描法
+,,,                ORG 0000H
+0000,02 00 03,,                LJMP MAIN
+0003,75 81 60,MAIN,MAIN:   MOV SP,#60H
+0006,75 80 0F,LOOP,LOOP:   MOV P0,#0FH             ;初始化
+0009,75 30 00,,                MOV 30H,#0              ;检查到几个有效按键
+000C,12 00 63,,                LCALL DELAY
+000F,E5 80,,                MOV A,P0
+0011,B4 0F 02,,                CJNE A,#0FH,SE1
+0014,80 F0,,                SJMP LOOP
+0016,12 00 63,SE1,SE1:    LCALL DELAY             ;消抖
+0019,E5 80,,                MOV A,P0
+001B,B4 0F 02,,                CJNE A,#0FH,SE2
+001E,80 E6,,                SJMP LOOP
+0020,7A 04,SE2,SE2:    MOV R2,#4               ;循环扫描四列
+0022,7E EF,,                MOV R6,#0EFH
+0024,8E 80,,                MOV P0,R6       ;扫描一列
+0026,7B 04,SE5,SE5:    MOV R3,#4               ;循环扫描四行
+0028,D3,,                SETB C
+0029,E5 80,,                MOV A,P0
+002B,13,SE4,SE4:    RRC A
+002C,50 05,,                JNC SE3                 ;扫描到行有效
+002E,DB FB,,                DJNZ R3,SE4             ;继续扫描下一行
+0030,02 00 45,,                LJMP  SE6               ;本列无
+0033,05 30,SE3,SE3:    INC 30H                 ;有效按键加1
+0035,74 04,,                MOV A,#4
+0037,9B,,                SUBB A,R3               ;前面有几行
+0038,75 F0 04,,                MOV B,#4
+003B,A4,,                MUL AB                  ;前面有几个按键
+003C,F5 31,,                MOV 31H,A               ;暂存
+003E,74 05,,                MOV A,#5
+0040,9A,,                SUBB A,R2
+0041,25 31,,                ADD A,31H               ;求键值
+0043,C0 E0,,                PUSH ACC                ;键值入栈
+0045,EE,SE6,SE6:    MOV A,R6                ;开始换下一列
+0046,D3,,                SETB C
+0047,33,,                RLC A
+0048,FE,,                MOV R6,A
+0049,8E 80,,                MOV P0,R6
+004B,DA D9,,                DJNZ R2,SE5
+004D,75 80 0F,,                MOV P0,#0FH
+0050,E5 80,TECH,TECH:   MOV A,P0                ;松手检测
+0052,B4 0F FB,,                CJNE A,#0FH,TECH
+0055,AD 30,,                MOV R5,30H              ;开始出栈所有按键
+0057,D0 E0,DIS,DIS:    POP ACC
+0059,F5 90,,                MOV P1,A
+005B,DD FA,,                DJNZ R5,DIS
+005D,12 00 63,,                LCALL DELAY
+0060,02 00 06,,                LJMP LOOP
+,,,
+0063,C0 30,DELAY,DELAY:  PUSH 30H
+0065,C0 31,,                PUSH 31H
+0067,75 30 14,,                MOV 30H,#20
+006A,75 31 F9,DELAY1,DELAY1: MOV 31H,#249
+006D,D5 31 FD,,                DJNZ 31H,$
+0070,D5 30 F7,,                DJNZ 30H,DELAY1
+0073,D0 31,,                POP 31H
+0075,D0 30,,                POP 30H
+0077,22,,                RET
+,,,
+000E,,,                END

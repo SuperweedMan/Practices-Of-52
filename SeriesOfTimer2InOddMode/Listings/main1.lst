@@ -1,0 +1,221 @@
+A51 MACRO ASSEMBLER  MAIN1                                                                02/28/2019 17:07:36 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.5.0
+OBJECT MODULE PLACED IN .\Objects\main1.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE main1.asm SET(SMALL) DEBUG PRINT(.\Listings\main1.lst) OBJECT(.\Objects
+                      \main1.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+  00C8                 1                     T2CON EQU 0C8H
+
+  00CA                 2                     TR2 EQU T2CON.2
+
+  00CA                 3                     RCAP2L EQU 0CAH
+
+  00CB                 4                     RCAP2H EQU 0CBH
+
+  00CD                 5                     TH2 EQU 0CDH
+
+  00CC                 6                     TL2 EQU 0CCH
+
+                       7                             
+
+0000                   8                     ORG 0000H
+
+0000 020026            9                     LJMP MAIN
+
+0023                  10                     ORG 0023H
+
+0023 020090           11                     LJMP SERIES
+
+0026 758160           12     MAIN:   MOV SP,#60H
+
+0029 12003C           13                     LCALL INIT
+
+002C 12007D           14                     LCALL SENDBUFF
+
+002F 10D502           15     HERE:   JBC F0,NEXT
+
+0032 80FB             16                     SJMP HERE
+
+0034 120060           17     NEXT:   LCALL DELAY
+
+0037 12007D           18                     LCALL SENDBUFF
+
+003A 80F3             19                     SJMP HERE
+
+                      20     
+
+003C C0D0             21     INIT:   PUSH PSW
+
+003E C0E0             22                     PUSH ACC
+
+0040 75CDFD           23                     MOV TH2,#0FDH
+
+0043 75CCF4           24                     MOV TL2,#0F4H
+
+0046 75CBFD           25                     MOV RCAP2H,#0FDH
+
+0049 75CAF4           26                     MOV RCAP2L,#0F4H
+
+004C 75C830           27                     MOV T2CON,#30H
+
+004F 758780           28                     MOV PCON,#80H
+
+0052 7598D0           29                     MOV SCON,#0D0H
+
+0055 D2AF             30                     SETB EA
+
+0057 D2AC             31                     SETB ES
+
+0059 D2CA             32                     SETB TR2
+
+005B D0E0             33                     POP ACC
+
+005D D0D0             34                     POP PSW
+
+005F 22               35                     RET
+
+                      36     
+
+0060 C030             37     DELAY:  PUSH 30H
+
+0062 C031             38                     PUSH 31H
+
+0064 C0D0             39                     PUSH PSW
+
+0066 C0E0             40                     PUSH ACC
+
+0068 7530FA           41                     MOV 30H,#250
+
+006B 7531FA           42     LOOP2:  MOV 31H,#250
+
+006E D531FD           43     LOOP1:  DJNZ 31H,LOOP1
+
+0071 D530F7           44                     DJNZ 30H,LOOP2
+
+0074 D0E0             45                     POP ACC
+
+0076 D0D0             46                     POP PSW
+
+0078 D031             47                     POP 31H
+
+007A D030             48                     POP 30H
+
+007C 22               49                     RET
+
+                      50     
+
+007D C0D0             51     SENDBUFF:PUSH PSW
+
+007F C0E0             52                     PUSH ACC
+
+0081 74FF             53                     MOV A,#0FFH
+
+0083 A2D0             54                     MOV C,P
+
+0085 B3               55                     CPL C
+
+0086 929B             56                     MOV TB8,C
+
+0088 7599FF           57                     MOV SBUF,#0FFH
+
+A51 MACRO ASSEMBLER  MAIN1                                                                02/28/2019 17:07:36 PAGE     2
+
+008B D0E0             58                     POP ACC
+
+008D D0D0             59                     POP PSW
+
+008F 22               60                     RET
+
+                      61     
+
+0090 109804           62     SERIES: JBC RI,RECEIVE
+
+0093 10991B           63                     JBC TI,SEND
+
+0096 32               64                     RETI
+
+0097 C0E0             65     RECEIVE:PUSH ACC
+
+0099 C0D0             66                     PUSH PSW
+
+009B E599             67                     MOV A,SBUF
+
+009D A2D0             68                     MOV C,P
+
+009F B3               69                     CPL C           ;奇校验
+
+00A0 4005             70                     JC SE1
+
+00A2 209A07           71                     JB RB8,ERR
+
+00A5 8003             72                     SJMP SE2
+
+00A7 309A02           73     SE1:    JNB RB8,ERR     
+
+00AA F590             74     SE2:    MOV P1,A
+
+00AC D0D0             75     ERR:    POP PSW
+
+00AE D0E0             76                     POP ACC
+
+00B0 32               77                     RETI
+
+00B1 D2D5             78     SEND:   SETB F0
+
+00B3 32               79                     RETI
+
+                      80                     END
+
+A51 MACRO ASSEMBLER  MAIN1                                                                02/28/2019 17:07:36 PAGE     3
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+ACC. . . . . . . .  D ADDR   00E0H   A   
+DELAY. . . . . . .  C ADDR   0060H   A   
+EA . . . . . . . .  B ADDR   00A8H.7 A   
+ERR. . . . . . . .  C ADDR   00ACH   A   
+ES . . . . . . . .  B ADDR   00A8H.4 A   
+F0 . . . . . . . .  B ADDR   00D0H.5 A   
+HERE . . . . . . .  C ADDR   002FH   A   
+INIT . . . . . . .  C ADDR   003CH   A   
+LOOP1. . . . . . .  C ADDR   006EH   A   
+LOOP2. . . . . . .  C ADDR   006BH   A   
+MAIN . . . . . . .  C ADDR   0026H   A   
+NEXT . . . . . . .  C ADDR   0034H   A   
+P. . . . . . . . .  B ADDR   00D0H.0 A   
+P1 . . . . . . . .  D ADDR   0090H   A   
+PCON . . . . . . .  D ADDR   0087H   A   
+PSW. . . . . . . .  D ADDR   00D0H   A   
+RB8. . . . . . . .  B ADDR   0098H.2 A   
+RCAP2H . . . . . .  N NUMB   00CBH   A   
+RCAP2L . . . . . .  N NUMB   00CAH   A   
+RECEIVE. . . . . .  C ADDR   0097H   A   
+RI . . . . . . . .  B ADDR   0098H.0 A   
+SBUF . . . . . . .  D ADDR   0099H   A   
+SCON . . . . . . .  D ADDR   0098H   A   
+SE1. . . . . . . .  C ADDR   00A7H   A   
+SE2. . . . . . . .  C ADDR   00AAH   A   
+SEND . . . . . . .  C ADDR   00B1H   A   
+SENDBUFF . . . . .  C ADDR   007DH   A   
+SERIES . . . . . .  C ADDR   0090H   A   
+SP . . . . . . . .  D ADDR   0081H   A   
+T2CON. . . . . . .  N NUMB   00C8H   A   
+TB8. . . . . . . .  B ADDR   0098H.3 A   
+TH2. . . . . . . .  N NUMB   00CDH   A   
+TI . . . . . . . .  B ADDR   0098H.1 A   
+TL2. . . . . . . .  N NUMB   00CCH   A   
+TR2. . . . . . . .  B ADDR   00C8H.2 A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

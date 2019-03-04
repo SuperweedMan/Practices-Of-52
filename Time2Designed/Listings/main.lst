@@ -1,0 +1,107 @@
+A51 MACRO ASSEMBLER  MAIN                                                                 02/26/2019 16:10:20 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.5.0
+OBJECT MODULE PLACED IN .\Objects\main.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE main.asm SET(SMALL) DEBUG PRINT(.\Listings\main.lst) OBJECT(.\Objects\m
+                      ain.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+                       1     ;T2COM: TF2 EXF2 RCLK TCLK EXEN2 TR2 C/T2 CP/RL2
+
+                       2     ;T2MOD:  T2OE DCEN
+
+                       3     ;IE: EA ET2 ES ET1 EX1 ET0 EX0
+
+                       4     ;IP: PT2 PS PT1 PX1 PT0 PX0
+
+  00C8                 5                     T2CON EQU 0C8H
+
+  00CA                 6                     TR2 EQU T2CON.2
+
+  00CF                 7                     TF2 EQU T2CON.7
+
+  00AD                 8                     ET2 EQU IE.5
+
+  00CA                 9                     RCAP2L EQU 0CAH
+
+  00CB                10                     RCAP2H EQU 0CBH
+
+  00CD                11                     TH2 EQU 0CDH
+
+  00CC                12                     TL2 EQU 0CCH    
+
+0000                  13                     ORG     0000H
+
+0000 02002E           14                     LJMP MAIN
+
+002B                  15                     ORG     002BH
+
+002B 020046           16                     LJMP IT2F
+
+002E C290             17     MAIN:   CLR     P1.0
+
+0030 7814             18                     MOV R0,#20
+
+0032 D2AF             19                     SETB EA
+
+0034 D2AD             20                     SETB ET2
+
+0036 75CB3C           21                     MOV RCAP2H,#3CH
+
+0039 75CAAD           22                     MOV RCAP2L,#0ADH
+
+003C 75CD3C           23                     MOV TH2,#3CH
+
+003F 75CCAD           24                     MOV TL2,#0ADH
+
+0042 D2CA             25                     SETB TR2
+
+0044 80FE             26     HERE:   SJMP HERE
+
+0046 C2CF             27     IT2F:   CLR TF2
+
+0048 D804             28                     DJNZ R0,NEXT
+
+004A B290             29                     CPL P1.0
+
+004C 7814             30                     MOV R0,#20
+
+004E 00               31     NEXT:   NOP
+
+004F 00               32                     NOP
+
+0050 32               33                     RETI
+
+                      34                     END
+
+A51 MACRO ASSEMBLER  MAIN                                                                 02/26/2019 16:10:20 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+EA . . . . . . . .  B ADDR   00A8H.7 A   
+ET2. . . . . . . .  B ADDR   00A8H.5 A   
+HERE . . . . . . .  C ADDR   0044H   A   
+IE . . . . . . . .  D ADDR   00A8H   A   
+IT2F . . . . . . .  C ADDR   0046H   A   
+MAIN . . . . . . .  C ADDR   002EH   A   
+NEXT . . . . . . .  C ADDR   004EH   A   
+P1 . . . . . . . .  D ADDR   0090H   A   
+RCAP2H . . . . . .  N NUMB   00CBH   A   
+RCAP2L . . . . . .  N NUMB   00CAH   A   
+T2CON. . . . . . .  N NUMB   00C8H   A   
+TF2. . . . . . . .  B ADDR   00C8H.7 A   
+TH2. . . . . . . .  N NUMB   00CDH   A   
+TL2. . . . . . . .  N NUMB   00CCH   A   
+TR2. . . . . . . .  B ADDR   00C8H.2 A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

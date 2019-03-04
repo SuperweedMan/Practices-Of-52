@@ -1,0 +1,47 @@
+,,,                T2CON EQU 0C8H
+000B,,,                TR2 EQU T2CON.2
+000B,,,                TF2 EQU T2CON.7
+000B,,,                EXF2 EQU T2CON.6
+000B,,,                ET2 EQU IE.5
+,,,                RCAP2L EQU 0CAH
+,,,                RCAP2H EQU 0CBH
+,,,                TH2 EQU 0CDH
+,,,                TL2 EQU 0CCH
+000B,,,                CP_RL2 EQU T2CON.0
+000B,,,                EXEN2 EQU T2CON.3
+,,,
+,,,                ORG 0000H
+0000,02 00 2E,,                LJMP MAIN
+,,,                ORG 002BH
+002B,02 00 54,,                LJMP IT2F
+002E,78 7F,MAIN,MAIN:   MOV R0,#7FH
+0030,79 02,,                MOV R1,#2
+0032,D2 AD,,                SETB ET2
+0034,D2 AF,,                SETB EA
+0036,D2 CB,,                SETB EXEN2
+0038,D2 C8,,                SETB CP_RL2
+003A,D2 CA,,                SETB TR2
+003C,B9 00 FD,HERE,HERE:   CJNE R1,#0,HERE
+003F,C2 AF,,                CLR EA
+0041,C2 AD,,                CLR ET2
+0043,C3,,                CLR C
+0044,E5 7D,,                MOV A,7DH
+0046,95 7F,,                SUBB A,7FH
+0048,FD,,                MOV R5,A       ;低四位
+0049,E5 7C,,                MOV A,7CH
+004B,95 7E,,                SUBB A,7EH
+004D,FE,,                MOV R6,A       ;高四位
+004E,8D 80,,                MOV P0,R5
+0050,8E 90,,                MOV P1,R6
+0052,80 FE,HERE2,HERE2:  SJMP HERE2
+0054,10 CE 03,IT2F,IT2F:   JBC EXF2,NEXT
+0057,C2 CF,,                CLR TF2
+0059,32,,                RETI
+005A,B9 00 01,NEXT,NEXT:   CJNE R1,#0,NEXT2
+005D,32,,                RETI
+005E,A6 CA,NEXT2,NEXT2:  MOV @R0,RCAP2L
+0060,18,,                DEC R0
+0061,A6 CB,,                MOV @R0,RCAP2H
+0063,19,,                DEC R1
+0064,32,,                RETI
+000E,,,                END

@@ -1,0 +1,202 @@
+
+ASEM-51 V1.3                                         Copyright (c) 2002 by W.W. Heinz                                         PAGE 1
+
+
+
+
+
+       MCS-51 Family Macro Assembler   A S E M - 5 1   V 1.3
+       =====================================================
+
+
+
+	Source File:	..\KeyBoard\main2.asm
+	Object File:	..\KeyBoard\main2.hex
+	List File:	..\KeyBoard\main2.lst
+
+
+
+ Line  I  Addr  Code            Source
+
+    1:				;多按点矩阵键盘 扫描法
+    2:		N      0000			ORG 0000H
+    3:	  0000	02 00 03			LJMP MAIN
+    4:	  0003	75 81 60	MAIN:	MOV SP,#60H
+    5:	  0006	75 80 0F	LOOP:	MOV P0,#0FH		;初始化
+    6:	  0009	75 30 00			MOV 30H,#0		;检查到几个有效按键
+    7:	  000C	12 00 63			LCALL DELAY
+    8:	  000F	E5 80				MOV A,P0
+    9:	  0011	B4 0F 02			CJNE A,#0FH,SE1
+   10:	  0014	80 F0				SJMP LOOP
+   11:	  0016	12 00 63	SE1:	LCALL DELAY		;消抖
+   12:	  0019	E5 80				MOV A,P0
+   13:	  001B	B4 0F 02			CJNE A,#0FH,SE2
+   14:	  001E	80 E6				SJMP LOOP
+   15:	  0020	7A 04		SE2:	MOV R2,#4 		;循环扫描四列
+   16:	  0022	7E EF				MOV R6,#0EFH
+   17:	  0024	8E 80				MOV P0,R6   	;扫描一列
+   18:	  0026	7B 04		SE5:	MOV R3,#4		;循环扫描四行
+   19:	  0028	D3				SETB C
+   20:	  0029	E5 80				MOV A,P0
+   21:	  002B	13		SE4:	RRC A
+   22:	  002C	50 05				JNC SE3			;扫描到行有效
+   23:	  002E	DB FB				DJNZ R3,SE4		;继续扫描下一行
+   24:	  0030	02 00 45			LJMP  SE6		;本列无
+   25:	  0033	05 30		SE3:	INC 30H			;有效按键加1
+   26:	  0035	74 04				MOV A,#4
+   27:	  0037	9B				SUBB A,R3		;前面有几行
+   28:	  0038	75 F0 04			MOV B,#4
+   29:	  003B	A4				MUL AB			;前面有几个按键
+   30:	  003C	F5 31				MOV 31H,A		;暂存
+   31:	  003E	74 05				MOV A,#5
+   32:	  0040	9A				SUBB A,R2
+   33:	  0041	25 31				ADD A,31H		;求键值
+   34:	  0043	C0 E0				PUSH ACC		;键值入栈
+   35:	  0045	EE		SE6:	MOV A,R6		;开始换下一列
+   36:	  0046	D3				SETB C
+   37:	  0047	33				RLC A
+   38:	  0048	FE				MOV R6,A
+   39:	  0049	8E 80				MOV P0,R6
+   40:	  004B	DA D9				DJNZ R2,SE5
+   41:	  004D	75 80 0F			MOV P0,#0FH
+   42:	  0050	E5 80		TECH:	MOV A,P0		;松手检测
+   43:	  0052	B4 0F FB			CJNE A,#0FH,TECH
+
+ASEM-51 V1.3                                         Copyright (c) 2002 by W.W. Heinz                                         PAGE 2
+
+
+
+ Line  I  Addr  Code            Source
+
+   44:	  0055	AD 30				MOV R5,30H		;开始出栈所有按键
+   45:	  0057	D0 E0		DIS:	POP ACC
+   46:	  0059	F5 90				MOV P1,A
+   47:	  005B	DD FA				DJNZ R5,DIS
+   48:	  005D	12 00 63			LCALL DELAY
+   49:	  0060	02 00 06			LJMP LOOP
+   50:
+   51:	  0063	C0 30		DELAY:	PUSH 30H
+   52:	  0065	C0 31				PUSH 31H
+   53:	  0067	75 30 14			MOV 30H,#20
+   54:	  006A	75 31 F9	DELAY1:	MOV 31H,#249
+   55:	  006D	D5 31 FD			DJNZ 31H,$
+   56:	  0070	D5 30 F7			DJNZ 30H,DELAY1
+   57:	  0073	D0 31				POP 31H
+   58:	  0075	D0 30				POP 30H
+   59:	  0077	22				RET
+   60:
+   61:						END
+
+
+
+
+
+                     register banks used:  ---
+
+                     no errors
+
+
+
+
+ASEM-51 V1.3                                         Copyright (c) 2002 by W.W. Heinz                                         PAGE 3
+
+
+
+
+
+	       L I S T   O F   S Y M B O L S
+	       =============================
+
+
+SYMBOL				  TYPE     VALUE	LINE
+------------------------------------------------------------
+??ASEM_51			  NUMBER    8051
+??VERSION			  NUMBER    0130
+AC				  BIT	      D6
+ACC				  DATA	      E0
+B				  DATA	      F0
+CY				  BIT	      D7
+DELAY				  CODE	    0063	  51
+DELAY1				  CODE	    006A	  54
+DIS				  CODE	    0057	  45
+DPH				  DATA	      83
+DPL				  DATA	      82
+EA				  BIT	      AF
+ES				  BIT	      AC
+ET0				  BIT	      A9
+ET1				  BIT	      AB
+EX0				  BIT	      A8
+EX1				  BIT	      AA
+EXTI0				  CODE	    0003
+EXTI1				  CODE	    0013
+F0				  BIT	      D5
+IE				  DATA	      A8
+IE0				  BIT	      89
+IE1				  BIT	      8B
+INT0				  BIT	      B2
+INT1				  BIT	      B3
+IP				  DATA	      B8
+IT0				  BIT	      88
+IT1				  BIT	      8A
+LOOP				  CODE	    0006	   5
+MAIN				  CODE	    0003	   4
+OV				  BIT	      D2
+P				  BIT	      D0
+P0				  DATA	      80
+P1				  DATA	      90
+P2				  DATA	      A0
+P3				  DATA	      B0
+PCON				  DATA	      87
+PS				  BIT	      BC
+PSW				  DATA	      D0
+PT0				  BIT	      B9
+PT1				  BIT	      BB
+PX0				  BIT	      B8
+PX1				  BIT	      BA
+RB8				  BIT	      9A
+RD				  BIT	      B7
+REN				  BIT	      9C
+RESET				  CODE	    0000
+RI				  BIT	      98
+RS0				  BIT	      D3
+RS1				  BIT	      D4
+
+ASEM-51 V1.3                                         Copyright (c) 2002 by W.W. Heinz                                         PAGE 4
+
+
+
+SYMBOL				  TYPE     VALUE	LINE
+------------------------------------------------------------
+RXD				  BIT	      B0
+SBUF				  DATA	      99
+SCON				  DATA	      98
+SE1				  CODE	    0016	  11
+SE2				  CODE	    0020	  15
+SE3				  CODE	    0033	  25
+SE4				  CODE	    002B	  21
+SE5				  CODE	    0026	  18
+SE6				  CODE	    0045	  35
+SINT				  CODE	    0023
+SM0				  BIT	      9F
+SM1				  BIT	      9E
+SM2				  BIT	      9D
+SP				  DATA	      81
+T0				  BIT	      B4
+T1				  BIT	      B5
+TB8				  BIT	      9B
+TCON				  DATA	      88
+TECH				  CODE	    0050	  42
+TF0				  BIT	      8D
+TF1				  BIT	      8F
+TH0				  DATA	      8C
+TH1				  DATA	      8D
+TI				  BIT	      99
+TIMER0				  CODE	    000B
+TIMER1				  CODE	    001B
+TL0				  DATA	      8A
+TL1				  DATA	      8B
+TMOD				  DATA	      89
+TR0				  BIT	      8C
+TR1				  BIT	      8E
+TXD				  BIT	      B1
+WR				  BIT	      B6

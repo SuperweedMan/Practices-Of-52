@@ -1,0 +1,64 @@
+A51 MACRO ASSEMBLER  MAIN2                                                                02/27/2019 13:48:25 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.5.0
+OBJECT MODULE PLACED IN .\Objects\main2.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE main2.asm SET(SMALL) DEBUG PRINT(.\Listings\main2.lst) OBJECT(.\Objects
+                      \main2.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+                       1     ;方式二：八位重装载计数器
+
+0000                   2                     ORG 0000H
+
+0000 02000E            3                     LJMP MAIN
+
+000B                   4                     ORG 000BH
+
+000B 02001F            5                     LJMP T0_F
+
+000E 758AFD            6     MAIN:   MOV TL0,#253
+
+0011 758CFD            7                     MOV TH0,#253
+
+0014 758906            8                     MOV TMOD,#6H
+
+0017 D2A9              9                     SETB ET0
+
+0019 D2AF             10                     SETB EA
+
+001B D28C             11                     SETB TR0
+
+001D 80FE             12     HERE:   SJMP HERE
+
+001F B290             13     T0_F:   CPL P1.0
+
+0021 32               14                     RETI
+
+                      15                     END
+
+A51 MACRO ASSEMBLER  MAIN2                                                                02/27/2019 13:48:25 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+EA . . . . . . . .  B ADDR   00A8H.7 A   
+ET0. . . . . . . .  B ADDR   00A8H.1 A   
+HERE . . . . . . .  C ADDR   001DH   A   
+MAIN . . . . . . .  C ADDR   000EH   A   
+P1 . . . . . . . .  D ADDR   0090H   A   
+T0_F . . . . . . .  C ADDR   001FH   A   
+TH0. . . . . . . .  D ADDR   008CH   A   
+TL0. . . . . . . .  D ADDR   008AH   A   
+TMOD . . . . . . .  D ADDR   0089H   A   
+TR0. . . . . . . .  B ADDR   0088H.4 A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

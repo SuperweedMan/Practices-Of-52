@@ -1,0 +1,118 @@
+A51 MACRO ASSEMBLER  MAIN3                                                                02/28/2019 15:20:41 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.5.0
+OBJECT MODULE PLACED IN .\Objects\main3.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE main3.asm SET(SMALL) DEBUG PRINT(.\Listings\main3.lst) OBJECT(.\Objects
+                      \main3.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1                     ORG 0000H
+
+0000 020026            2                     LJMP MAIN
+
+000B                   3                     ORG 000BH
+
+000B 02004D            4                     LJMP T0_F
+
+001B                   5                     ORG 001BH
+
+001B 020053            6                     LJMP T1_F
+
+0023                   7                     ORG 0023H
+
+0023 020059            8                     LJMP USART
+
+0026 758A00            9     MAIN:   MOV TL0,#0
+
+0029 758CE6           10                     MOV TH0,#230
+
+002C 758BE6           11                     MOV TL1,#230
+
+002F 758DFA           12                     MOV TH1,#250
+
+0032 758923           13                     MOV TMOD,#23H
+
+0035 7480             14                     MOV A,#80H
+
+0037 4587             15                     ORL A,PCON
+
+0039 F587             16                     MOV PCON,A
+
+003B D29E             17                     SETB SM1
+
+003D D29C             18                     SETB REN
+
+003F D2A9             19                     SETB ET0
+
+0041 D2AB             20                     SETB ET1
+
+0043 D2AC             21                     SETB ES
+
+0045 D2AF             22                     SETB EA
+
+0047 D28C             23                     SETB TR0
+
+0049 D28E             24                     SETB TR1
+
+004B 80FE             25     HERE:   SJMP HERE
+
+004D B290             26     T0_F:   CPL P1.0
+
+004F 758AE6           27                     MOV TL0,#230
+
+0052 32               28                     RETI
+
+0053 B291             29     T1_F:   CPL P1.1
+
+0055 758CE6           30                     MOV TH0,#230
+
+0058 32               31                     RETI
+
+0059 109801           32     USART:  JBC RI,NEXT
+
+005C 32               33                     RETI
+
+005D B292             34     NEXT:   CPL P1.2
+
+005F 32               35                     RETI
+
+                      36                     END
+
+A51 MACRO ASSEMBLER  MAIN3                                                                02/28/2019 15:20:41 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+EA . . . . . . . .  B ADDR   00A8H.7 A   
+ES . . . . . . . .  B ADDR   00A8H.4 A   
+ET0. . . . . . . .  B ADDR   00A8H.1 A   
+ET1. . . . . . . .  B ADDR   00A8H.3 A   
+HERE . . . . . . .  C ADDR   004BH   A   
+MAIN . . . . . . .  C ADDR   0026H   A   
+NEXT . . . . . . .  C ADDR   005DH   A   
+P1 . . . . . . . .  D ADDR   0090H   A   
+PCON . . . . . . .  D ADDR   0087H   A   
+REN. . . . . . . .  B ADDR   0098H.4 A   
+RI . . . . . . . .  B ADDR   0098H.0 A   
+SM1. . . . . . . .  B ADDR   0098H.6 A   
+T0_F . . . . . . .  C ADDR   004DH   A   
+T1_F . . . . . . .  C ADDR   0053H   A   
+TH0. . . . . . . .  D ADDR   008CH   A   
+TH1. . . . . . . .  D ADDR   008DH   A   
+TL0. . . . . . . .  D ADDR   008AH   A   
+TL1. . . . . . . .  D ADDR   008BH   A   
+TMOD . . . . . . .  D ADDR   0089H   A   
+TR0. . . . . . . .  B ADDR   0088H.4 A   
+TR1. . . . . . . .  B ADDR   0088H.6 A   
+USART. . . . . . .  C ADDR   0059H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

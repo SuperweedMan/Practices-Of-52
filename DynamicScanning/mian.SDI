@@ -1,0 +1,55 @@
+,,,;30H 显示的值 31H百位 32H十位 33H个位
+,,,                ORG 0000H
+0000,02 00 03,,                LJMP MAIN
+0003,75 81 60,MAIN,MAIN:   MOV SP,#60H
+0006,75 A0 FF,,                MOV P2,#0FFH
+0009,75 30 9A,,                MOV     30H,#154 ;显示的值
+000C,12 00 11,HERE,HERE:   LCALL DISPLAY
+000F,80 FB,,                SJMP HERE
+,,,
+0011,C0 D0,DISPLAY,DISPLAY:PUSH PSW
+0013,C0 F0,,                PUSH B
+0015,E5 30,,                MOV A,30H
+0017,75 F0 64,,                MOV B,#100
+001A,84,,                DIV AB
+001B,F5 31,,                MOV 31H,A ;百位
+001D,E5 F0,,                MOV A,B
+001F,75 F0 0A,,                MOV B,#10
+0022,84,,                DIV AB
+0023,F5 32,,                MOV 32H,A ;十位
+0025,85 F0 33,,                MOV 33H,B ;个位
+0028,7A 03,,                MOV R2,#3  ;for循环3次
+002A,7B FE,,                MOV R3,#0FEH
+002C,78 31,,                MOV R0,#31H     ;选择位
+002E,90 00 5A,,                MOV DPTR ,#TABLE
+0031,E6,LOOP,LOOP:   MOV A,@R0
+0032,93,,                MOVC A,@A+DPTR
+0033,8B A0,,                MOV P2,R3       ;片选
+0035,F5 80,,                MOV P0,A        ;段码
+,,,
+0037,08,,                INC R0
+0038,EB,,                MOV A,R3
+0039,23,,                RL A
+003A,FB,,                MOV R3,A
+003B,12 00 45,,                LCALL DELAY
+003E,DA F1,,                DJNZ R2,LOOP
+0040,D0 F0,,                POP B
+0042,D0 D0,,                POP PSW
+0044,22,,                RET
+,,,
+0045,EE,DELAY,DELAY:  MOV A,R6
+0046,C0 E0,,                PUSH ACC
+0048,EF,,                MOV A,R7
+0049,C0 E0,,                PUSH ACC
+004B,7E 14,,                MOV R6,#20
+004D,7F 18,DELAY1,DELAY1: MOV R7,#24
+004F,DF FE,,                DJNZ R7,$
+0051,DE FA,,                DJNZ R6,DELAY1
+0053,D0 E0,,                POP ACC
+0055,FF,,                MOV R7,A
+0056,D0 E0,,                POP ACC
+0058,FE,,                MOV R6,A
+0059,22,,                RET
+,,,
+005A,3F 06 5B 4F,TABLE,TABLE:  DB 3FH,06H,5BH,4FH,66H,6DH,7DH,07H,7FH,6FH
+000E,,,                END

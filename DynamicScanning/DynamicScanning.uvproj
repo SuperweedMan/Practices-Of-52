@@ -45,7 +45,7 @@
             <InvalidFlash>1</InvalidFlash>
           </TargetStatus>
           <OutputDirectory>.\Objects\</OutputDirectory>
-          <OutputName>Time2Designed</OutputName>
+          <OutputName>DynamicScanning</OutputName>
           <CreateExecutable>1</CreateExecutable>
           <CreateLib>0</CreateLib>
           <CreateHexFile>0</CreateHexFile>
@@ -364,9 +364,9 @@
           <GroupName>Source Group 1</GroupName>
           <Files>
             <File>
-              <FileName>main2.asm</FileName>
+              <FileName>mian.asm</FileName>
               <FileType>2</FileType>
-              <FilePath>.\main2.asm</FilePath>
+              <FilePath>.\mian.asm</FilePath>
             </File>
           </Files>
         </Group>

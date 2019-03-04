@@ -1,0 +1,3 @@
+".\Objects\main2.obj" 
+TO ".\Objects\Time2Designed" 
+PRINT(".\Listings\Time2Designed.m51") RAMSIZE(256) 

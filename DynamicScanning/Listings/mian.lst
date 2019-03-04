@@ -1,0 +1,149 @@
+A51 MACRO ASSEMBLER  MIAN                                                                 03/03/2019 20:07:30 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.5.0
+OBJECT MODULE PLACED IN .\Objects\mian.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE mian.asm SET(SMALL) DEBUG PRINT(.\Listings\mian.lst) OBJECT(.\Objects\m
+                      ian.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+                       1     ;30H 显示的值 31H百位 32H十位 33H个位
+
+0000                   2                     ORG 0000H
+
+0000 020003            3                     LJMP MAIN
+
+0003 758160            4     MAIN:   MOV SP,#60H
+
+0006 75A0FF            5                     MOV P2,#0FFH
+
+0009 75309A            6                     MOV     30H,#154 ;显示的值
+
+000C 120011            7     HERE:   LCALL DISPLAY
+
+000F 80FB              8                     SJMP HERE
+
+                       9     
+
+0011 C0D0             10     DISPLAY:PUSH PSW
+
+0013 C0F0             11                     PUSH B
+
+0015 E530             12                     MOV A,30H
+
+0017 75F064           13                     MOV B,#100
+
+001A 84               14                     DIV AB
+
+001B F531             15                     MOV 31H,A ;百位
+
+001D E5F0             16                     MOV A,B
+
+001F 75F00A           17                     MOV B,#10
+
+0022 84               18                     DIV AB
+
+0023 F532             19                     MOV 32H,A ;十位
+
+0025 85F033           20                     MOV 33H,B ;个位
+
+0028 7A03             21                     MOV R2,#3  ;for循环3次
+
+002A 7BFE             22                     MOV R3,#0FEH
+
+002C 7831             23                     MOV R0,#31H     ;选择位
+
+002E 90005A           24                     MOV DPTR ,#TABLE
+
+0031 E6               25     LOOP:   MOV A,@R0
+
+0032 93               26                     MOVC A,@A+DPTR
+
+0033 8BA0             27                     MOV P2,R3       ;片选
+
+0035 F580             28                     MOV P0,A        ;段码
+
+                      29     
+
+0037 08               30                     INC R0
+
+0038 EB               31                     MOV A,R3
+
+0039 23               32                     RL A
+
+003A FB               33                     MOV R3,A
+
+003B 120045           34                     LCALL DELAY
+
+003E DAF1             35                     DJNZ R2,LOOP
+
+0040 D0F0             36                     POP B
+
+0042 D0D0             37                     POP PSW
+
+0044 22               38                     RET
+
+                      39     
+
+0045 EE               40     DELAY:  MOV A,R6
+
+0046 C0E0             41                     PUSH ACC
+
+0048 EF               42                     MOV A,R7
+
+0049 C0E0             43                     PUSH ACC
+
+004B 7E14             44                     MOV R6,#20
+
+004D 7F18             45     DELAY1: MOV R7,#24
+
+004F DFFE             46                     DJNZ R7,$
+
+0051 DEFA             47                     DJNZ R6,DELAY1
+
+0053 D0E0             48                     POP ACC
+
+0055 FF               49                     MOV R7,A
+
+0056 D0E0             50                     POP ACC
+
+0058 FE               51                     MOV R6,A
+
+0059 22               52                     RET
+
+                      53     
+
+005A 3F065B4F         54     TABLE:  DB 3FH,06H,5BH,4FH,66H,6DH,7DH,07H,7FH,6FH              
+
+005E 666D7D07                
+0062 7F6F                    
+                      55                     END
+
+A51 MACRO ASSEMBLER  MIAN                                                                 03/03/2019 20:07:30 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+ACC. . . . . . . .  D ADDR   00E0H   A   
+B. . . . . . . . .  D ADDR   00F0H   A   
+DELAY. . . . . . .  C ADDR   0045H   A   
+DELAY1 . . . . . .  C ADDR   004DH   A   
+DISPLAY. . . . . .  C ADDR   0011H   A   
+HERE . . . . . . .  C ADDR   000CH   A   
+LOOP . . . . . . .  C ADDR   0031H   A   
+MAIN . . . . . . .  C ADDR   0003H   A   
+P0 . . . . . . . .  D ADDR   0080H   A   
+P2 . . . . . . . .  D ADDR   00A0H   A   
+PSW. . . . . . . .  D ADDR   00D0H   A   
+SP . . . . . . . .  D ADDR   0081H   A   
+TABLE. . . . . . .  C ADDR   005AH   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)
